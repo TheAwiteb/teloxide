@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ChatId::as_user` ([#905][pr905])
 - Implement `PartialEq<ChatId> for UserId` and `PartialEq<UserId> for ChatId` ([#905][pr905])
 - `ChatId::{MIN, MAX}` ([#905][pr905])
+- Add `can_send_audios`, `can_send_documents`, `can_send_photos`, `can_send_videos`, `can_send_video_notes`, and `can_send_voice_notes` for `ChatPermissions`, `Restricted` and `ChatPermissionsRaw` ([#][pr])
 
 [pr851]: https://github.com/teloxide/teloxide/pull/851
 [pr887]: https://github.com/teloxide/teloxide/pull/887
@@ -79,6 +80,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Update::user`, use `Update::from` instead ([#850][pr850])
 
 [pr850]: https://github.com/teloxide/teloxide/pull/850
+
+### Removed
+- Remove `can_send_media_messages` from `ChatPermissions` and `ChatPermissionsRaw` ([#][pr])
+- Remove `ChatMemberKind::can_send_media_messages` instance function ([#][pr])
+- Remove `can_send_media_messages` field from `Restricted` ([#][pr])
 
 ### Fixed
 
