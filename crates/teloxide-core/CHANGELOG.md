@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `can_send_audios`, `can_send_documents`, `can_send_photos`, `can_send_videos`, `can_send_video_notes`, and `can_send_voice_notes` for `ChatPermissions`, `Restricted` and `ChatPermissionsRaw` ([#][pr])
 - Add the `use_independent_chat_permissions` field to `RestrictChatMember` and `SetChatPermissions` ([#][pr])
 - Add `user_chat_id` field to `ChatJoinRequest` ([#][pr])
+- Add `ChatShared` kind to `MessageKind` ([#][pr])
+- Add `shared_chat` instance function to `Message` to get the `SharedChat` ([#][pr])
+- Add `KeyboardButtonRequestChat` and `SharedChat` to types ([#][pr])
+- Add `RequestChat` to `ButtonRequest` ([#][pr])
 
 [pr851]: https://github.com/teloxide/teloxide/pull/851
 [pr887]: https://github.com/teloxide/teloxide/pull/887
