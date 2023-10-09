@@ -5,12 +5,12 @@ use serde::{Deserialize, Serialize};
 use url::Url;
 
 use crate::types::{
-    Animation, Audio, BareChatId, Chat, ChatId, Contact, Dice, Document, ForumTopicClosed,
-    ForumTopicCreated, ForumTopicEdited, ForumTopicReopened, Game, GeneralForumTopicHidden,
-    GeneralForumTopicUnhidden, InlineKeyboardMarkup, Invoice, Location,
+    Animation, Audio, BareChatId, Chat, ChatId, ChatShared, Contact, Dice, Document,
+    ForumTopicClosed, ForumTopicCreated, ForumTopicEdited, ForumTopicReopened, Game,
+    GeneralForumTopicHidden, GeneralForumTopicUnhidden, InlineKeyboardMarkup, Invoice, Location,
     MessageAutoDeleteTimerChanged, MessageEntity, MessageEntityRef, MessageId, PassportData,
-    PhotoSize, Poll, ProximityAlertTriggered, SharedChat, Sticker, SuccessfulPayment, ThreadId,
-    True, User, Venue, Video, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
+    PhotoSize, Poll, ProximityAlertTriggered, Sticker, SuccessfulPayment, ThreadId, True, User,
+    Venue, Video, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
     VideoChatStarted, VideoNote, Voice, WebAppData, WriteAccessAllowed,
 };
 
@@ -60,7 +60,7 @@ pub enum MessageKind {
     ChannelChatCreated(MessageChannelChatCreated),
     MessageAutoDeleteTimerChanged(MessageMessageAutoDeleteTimerChanged),
     Pinned(MessagePinned),
-    ChatShared(MessageSharedChat),
+    ChatShared(MessageChatShared),
     Invoice(MessageInvoice),
     SuccessfulPayment(MessageSuccessfulPayment),
     ConnectedWebsite(MessageConnectedWebsite),
@@ -249,9 +249,9 @@ pub struct MessagePinned {
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct MessageSharedChat {
+pub struct MessageChatShared {
     /// A chat was shared with the bot.
-    pub chat_shared: SharedChat,
+    pub chat_shared: ChatShared,
 }
 
 #[serde_with_macros::skip_serializing_none]
@@ -666,7 +666,7 @@ mod getters {
         MessageConnectedWebsite, MessageDeleteChatPhoto, MessageDice, MessageEntity,
         MessageGroupChatCreated, MessageId, MessageInvoice, MessageLeftChatMember,
         MessageNewChatMembers, MessageNewChatPhoto, MessageNewChatTitle, MessagePassportData,
-        MessagePinned, MessageProximityAlertTriggered, MessageSharedChat, MessageSuccessfulPayment,
+        MessagePinned, MessageProximityAlertTriggered, MessageChatShared, MessageSuccessfulPayment,
         MessageSupergroupChatCreated, MessageVideoChatParticipantsInvited, PhotoSize, True, User,
     };
 
@@ -1213,9 +1213,9 @@ mod getters {
         }
 
         #[must_use]
-        pub fn shared_chat(&self) -> Option<&types::SharedChat> {
+        pub fn shared_chat(&self) -> Option<&types::ChatShared> {
             match &self.kind {
-                ChatShared(MessageSharedChat { chat_shared }) => Some(chat_shared),
+                ChatShared(MessageChatShared { chat_shared }) => Some(chat_shared),
                 _ => None,
             }
         }
@@ -1594,8 +1594,8 @@ mod tests {
                     message_auto_delete_time: None,
                     has_hidden_members: false
                 },
-                kind: MessageKind::ChatShared(MessageSharedChat {
-                    chat_shared: SharedChat { request_id: 348349, chat_id: ChatId(384939) }
+                kind: MessageKind::ChatShared(MessageChatShared {
+                    chat_shared: ChatShared { request_id: 348349, chat_id: ChatId(384939) }
                 }),
                 via_bot: None
             }
