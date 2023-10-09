@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `shared_chat` instance function to `Message` to get the `ChatShared` ([#][pr])
 - Add `KeyboardButtonRequestChat` and `ChatShared` to types ([#][pr])
 - Add `RequestChat` to `ButtonRequest` ([#][pr])
+- Add `UserShared` kind to `MessageKind` ([#][pr])
+- Add `shared_user` instance function to `Message` to get the `UserShared` ([#][pr])
+- Add `KeyboardButtonRequestUser` and `UserShared` to types ([#][pr])
+- Add `RequestChat` to `ButtonRequest` ([#][pr])
 
 [pr851]: https://github.com/teloxide/teloxide/pull/851
 [pr887]: https://github.com/teloxide/teloxide/pull/887
