@@ -12,49 +12,51 @@ use crate::types::ChatAdministratorRights;
 pub struct KeyboardButtonRequestChat {
     /// identifier of the request, which will be received back in the
     /// [`ChatShared`] object. Must be unique within the message.
-    request_id: i32,
+    ///
+    /// [`ChatShared`]: crate::types::ChatShared
+    pub request_id: i32,
 
     /// Pass True to request a channel chat, pass False to request a group or a
     /// supergroup chat.
-    chat_is_channel: bool,
+    pub chat_is_channel: bool,
 
     /// Pass True to request a forum supergroup, pass False to request a
     /// non-forum chat. If not specified, no additional restrictions are
     /// applied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_is_forum: Option<bool>,
+    pub chat_is_forum: Option<bool>,
 
     /// Pass True to request a supergroup or a channel with a username, pass
     /// False to request a chat without a username. If not specified, no
     /// additional restrictions are applied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_has_username: Option<bool>,
+    pub chat_has_username: Option<bool>,
 
     /// Pass True to request a chat owned by the user. Otherwise, no additional
     /// restrictions are applied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    chat_is_created: Option<bool>,
+    pub chat_is_created: Option<bool>,
 
     /// Listing the required administrator rights of the user in the chat. The
     /// rights must be a superset of bot_administrator_rights. If not specified,
     /// no additional restrictions are applied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    user_administrator_rights: Option<ChatAdministratorRights>,
+    pub user_administrator_rights: Option<ChatAdministratorRights>,
 
     /// Listing the required administrator rights of the bot in the chat. The
     /// rights must be a subset of user_administrator_rights. If not specified,
     /// no additional restrictions are applied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    bot_administrator_rights: Option<ChatAdministratorRights>,
+    pub bot_administrator_rights: Option<ChatAdministratorRights>,
 
     /// Pass True to request a chat with the bot as a member. Otherwise, no
     /// additional restrictions are applied.
     #[serde(skip_serializing_if = "std::ops::Not::not")]
-    bot_is_member: bool,
+    pub bot_is_member: bool,
 }
 
 impl KeyboardButtonRequestChat {
-    /// Creates a new `KeyboardButtonRequestChat`.
+    /// Creates a new [`KeyboardButtonRequestChat`].
     pub fn new(request_id: i32, chat_is_channel: bool) -> Self {
         Self {
             request_id,

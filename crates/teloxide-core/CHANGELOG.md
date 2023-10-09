@@ -23,8 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add the `use_independent_chat_permissions` field to `RestrictChatMember` and `SetChatPermissions` ([#][pr])
 - Add `user_chat_id` field to `ChatJoinRequest` ([#][pr])
 - Add `ChatShared` kind to `MessageKind` ([#][pr])
-- Add `shared_chat` instance function to `Message` to get the `SharedChat` ([#][pr])
-- Add `KeyboardButtonRequestChat` and `SharedChat` to types ([#][pr])
+- Add `shared_chat` instance function to `Message` to get the `ChatShared` ([#][pr])
+- Add `KeyboardButtonRequestChat` and `ChatShared` to types ([#][pr])
+- Add `RequestChat` to `ButtonRequest` ([#][pr])
+- Add `UserShared` kind to `MessageKind` ([#][pr])
+- Add `shared_user` instance function to `Message` to get the `UserShared` ([#][pr])
+- Add `KeyboardButtonRequestUser` and `UserShared` to types ([#][pr])
 - Add `RequestChat` to `ButtonRequest` ([#][pr])
 
 [pr851]: https://github.com/teloxide/teloxide/pull/851
