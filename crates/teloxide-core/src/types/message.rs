@@ -10,7 +10,7 @@ use crate::types::{
     GeneralForumTopicHidden, GeneralForumTopicUnhidden, InlineKeyboardMarkup, Invoice, Location,
     MessageAutoDeleteTimerChanged, MessageEntity, MessageEntityRef, MessageId, PassportData,
     PhotoSize, Poll, ProximityAlertTriggered, Sticker, SuccessfulPayment, ThreadId, True, User,
-    Venue, Video, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
+    UserShared, Venue, Video, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
     VideoChatStarted, VideoNote, Voice, WebAppData, WriteAccessAllowed,
 };
 
@@ -61,6 +61,7 @@ pub enum MessageKind {
     MessageAutoDeleteTimerChanged(MessageMessageAutoDeleteTimerChanged),
     Pinned(MessagePinned),
     ChatShared(MessageChatShared),
+    UserShared(MessageUserShared),
     Invoice(MessageInvoice),
     SuccessfulPayment(MessageSuccessfulPayment),
     ConnectedWebsite(MessageConnectedWebsite),
@@ -252,6 +253,12 @@ pub struct MessagePinned {
 pub struct MessageChatShared {
     /// A chat was shared with the bot.
     pub chat_shared: ChatShared,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct MessageUserShared {
+    /// A chat was shared with the bot.
+    pub user_shared: UserShared,
 }
 
 #[serde_with_macros::skip_serializing_none]
@@ -662,12 +669,13 @@ mod getters {
         self, message::MessageKind::*, Chat, ChatId, ChatMigration, Forward, ForwardedFrom,
         MediaAnimation, MediaAudio, MediaContact, MediaDocument, MediaGame, MediaKind,
         MediaLocation, MediaPhoto, MediaPoll, MediaSticker, MediaText, MediaVenue, MediaVideo,
-        MediaVideoNote, MediaVoice, Message, MessageChannelChatCreated, MessageCommon,
-        MessageConnectedWebsite, MessageDeleteChatPhoto, MessageDice, MessageEntity,
+        MediaVideoNote, MediaVoice, Message, MessageChannelChatCreated, MessageChatShared,
+        MessageCommon, MessageConnectedWebsite, MessageDeleteChatPhoto, MessageDice, MessageEntity,
         MessageGroupChatCreated, MessageId, MessageInvoice, MessageLeftChatMember,
         MessageNewChatMembers, MessageNewChatPhoto, MessageNewChatTitle, MessagePassportData,
-        MessagePinned, MessageProximityAlertTriggered, MessageChatShared, MessageSuccessfulPayment,
-        MessageSupergroupChatCreated, MessageVideoChatParticipantsInvited, PhotoSize, True, User,
+        MessagePinned, MessageProximityAlertTriggered, MessageSuccessfulPayment,
+        MessageSupergroupChatCreated, MessageUserShared, MessageVideoChatParticipantsInvited,
+        PhotoSize, True, User,
     };
 
     /// Getters for [Message] fields from [telegram docs].
@@ -1216,6 +1224,14 @@ mod getters {
         pub fn shared_chat(&self) -> Option<&types::ChatShared> {
             match &self.kind {
                 ChatShared(MessageChatShared { chat_shared }) => Some(chat_shared),
+                _ => None,
+            }
+        }
+
+        #[must_use]
+        pub fn shared_user(&self) -> Option<&types::UserShared> {
+            match &self.kind {
+                UserShared(MessageUserShared { user_shared }) => Some(user_shared),
                 _ => None,
             }
         }
